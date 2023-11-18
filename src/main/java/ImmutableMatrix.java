@@ -172,6 +172,18 @@ public class ImmutableMatrix implements IMatrix{
         return multiplct;
     }
 
+    //транспонування матриці
+    @Override
+    public IMatrix transposeMatrix() {
+        ImmutableMatrix transpose = new ImmutableMatrix(this.elements.length, this.elements[0].length);
+        for (int i = 0; i < this.elements.length; i++)  {
+            for (int j = 0; j < this.elements[0].length; j++) {
+                transpose.elements[i][j] = this.elements[j][i];
+            }
+        }
+        return transpose;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {

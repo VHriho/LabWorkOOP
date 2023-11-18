@@ -30,6 +30,8 @@ public interface IMatrix {
 
     IMatrix multiplication(IMatrix matrix); //добуток мариць
 
+    IMatrix transposeMatrix(); //повертає транспоновану матрицю
+
     float[][] getMatrix(); //повертає матрицю
 
 }

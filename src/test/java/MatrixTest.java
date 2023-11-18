@@ -334,4 +334,33 @@ public class MatrixTest {
         Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix.sumMatrix(matrix4));
         Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
     }
+
+    //повертає транспоновану матрицю
+    @Test
+    public void step10() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+
+        Assertions.assertEquals(1, matrix.transposeMatrix().getMatrix()[0][0]);
+        Assertions.assertEquals(4, matrix.transposeMatrix().getMatrix()[0][1]);
+        Assertions.assertEquals(7, matrix.transposeMatrix().getMatrix()[0][2]);
+        Assertions.assertEquals(2, matrix.transposeMatrix().getMatrix()[1][0]);
+    }
+
+    @Test
+    public void step10ForImmutable() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+
+        IMatrix matrix1 = new ImmutableMatrix(matrix);
+
+        Assertions.assertEquals(1, matrix1.transposeMatrix().getMatrix()[0][0]);
+        Assertions.assertEquals(4, matrix1.transposeMatrix().getMatrix()[0][1]);
+        Assertions.assertEquals(7, matrix1.transposeMatrix().getMatrix()[0][2]);
+        Assertions.assertEquals(2, matrix1.transposeMatrix().getMatrix()[1][0]);
+    }
+
+    
 }
