@@ -250,6 +250,20 @@ public class Matrix implements IMatrix {
         return rowMat;
     }
 
+    //матриця-стовпчик
+    @Override
+    public IMatrix columnMatrix(int n) {
+        if(n <= 0 )
+            throw new NegativeArraySizeException("Column value must be not negative or equal 0");
+        Random setRandom = new Random();
+        Matrix columnMat = new Matrix(1, n);
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < n; j++) {
+                columnMat.elements[0][j] = setRandom.nextFloat(10);
+            }
+        }
+        return columnMat;
+    }
 
     //Повертає матрицю
     @Override

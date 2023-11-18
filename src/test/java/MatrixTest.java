@@ -452,4 +452,35 @@ public class MatrixTest {
         Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.rowMatrix(0));
         Assertions.assertEquals("Row value must be not negative or equal 0", thrown.getMessage());
     }
+
+    //Матрицюя-стовпчик, заповнена випадковими значеннями
+    @Test
+    public void step14() {
+        IMatrix matrix = new Matrix();
+        IMatrix matrix2 = new Matrix(new ImmutableMatrix(new Matrix(3,3)));
+
+        Assertions.assertEquals(1, matrix.columnMatrix(3).getDimension().get("Rows"));
+        Assertions.assertEquals(3, matrix.columnMatrix(3).getDimension().get("Columns"));
+        Assertions.assertEquals(1, matrix2.columnMatrix(4).getDimension().get("Rows"));
+        Assertions.assertEquals(4, matrix2.columnMatrix(4).getDimension().get("Columns"));
+
+        //виняток при від'ємних значеннях розмірності матриці-стовпця
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.columnMatrix(-2));
+        Assertions.assertEquals("Column value must be not negative or equal 0", thrown.getMessage());
+    }
+
+    @Test
+    public void step14ForImmutable() {
+        IMatrix matrix = new ImmutableMatrix();
+        IMatrix matrix2 = new Matrix(new ImmutableMatrix(new Matrix(3,3)));
+
+        Assertions.assertEquals(1, matrix.columnMatrix(3).getDimension().get("Rows"));
+        Assertions.assertEquals(3, matrix.columnMatrix(3).getDimension().get("Columns"));
+        Assertions.assertEquals(1, matrix2.columnMatrix(4).getDimension().get("Rows"));
+        Assertions.assertEquals(4, matrix2.columnMatrix(4).getDimension().get("Columns"));
+
+        //виняток при від'ємних значеннях розмірності матриці-стовпця
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.columnMatrix(0));
+        Assertions.assertEquals("Column value must be not negative or equal 0", thrown.getMessage());
+    }
 }

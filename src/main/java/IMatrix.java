@@ -38,6 +38,8 @@ public interface IMatrix {
 
     IMatrix rowMatrix(int m); //матриця рядок
 
+    IMatrix columnMatrix(int n); //матриця стовпчик
+
     float[][] getMatrix(); //повертає матрицю
 
 }
