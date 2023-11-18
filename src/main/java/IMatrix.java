@@ -28,6 +28,8 @@ public interface IMatrix {
 
     IMatrix multMatrix(float mult); //повертає добуток матриці на скаляр
 
+    IMatrix multiplication(IMatrix matrix); //добуток мариць
+
     float[][] getMatrix(); //повертає матрицю
 
 }

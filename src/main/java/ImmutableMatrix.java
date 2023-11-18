@@ -155,6 +155,23 @@ public class ImmutableMatrix implements IMatrix{
         return resMult;
     }
 
+    //множення матриць
+    @Override
+    public IMatrix multiplication(IMatrix matrix) {
+        if (this.getColumns() != matrix.getColumns())
+            throw new IllegalArgumentException("Matrices must have an equal number of columns and rows");
+        ImmutableMatrix multiplct = new ImmutableMatrix(this.getRows(), matrix.getColumns());
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                multiplct.elements[i][j] = 0;
+                for (int a = 0; a < this.getColumns(); a++){
+                    multiplct.elements[i][j] += this.elements[i][a] * matrix.getElem(a,j);
+                }
+            }
+        }
+        return multiplct;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {

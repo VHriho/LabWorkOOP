@@ -286,5 +286,52 @@ public class MatrixTest {
         Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
     }
 
-    
+    //множення матриць
+    @Test
+    public void step9() {
+        IMatrix matrix = new Matrix(2,2);
+        matrix.setElem(0,0,2);
+        matrix.setElem(0,1,3);
+        matrix.setElem(1,0,2);
+        matrix.setElem(1,1,7);
+
+        IMatrix matrix1 = new Matrix(1,2);
+        matrix1.setElem(0,0,4);
+        matrix1.setElem(0,1,5);
+
+        IMatrix matrix2 = new Matrix(3,3);
+        matrix2.setRandomElem();
+
+        Assertions.assertEquals(18, matrix1.multiplication(matrix).getMatrix()[0][0]);
+        Assertions.assertEquals(47, matrix1.multiplication(matrix).getMatrix()[0][1]);
+
+        //виняток при нерівності розмірностей матриць, що перемножуються
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix.sumMatrix(matrix2));
+        Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
+    }
+
+    @Test
+    public void step9ForImmutable() {
+        IMatrix matrix = new Matrix(2,2);
+        matrix.setElem(0,0,2);
+        matrix.setElem(0,1,3);
+        matrix.setElem(1,0,2);
+        matrix.setElem(1,1,7);
+
+        IMatrix matrix1 = new Matrix(1,2);
+        matrix1.setElem(0,0,4);
+        matrix1.setElem(0,1,5);
+
+        IMatrix matrix2 = new ImmutableMatrix(matrix);
+        IMatrix matrix3 = new ImmutableMatrix(matrix1);
+
+        IMatrix matrix4 = new ImmutableMatrix(3,3);
+
+        Assertions.assertEquals(18, matrix3.multiplication(matrix2).getMatrix()[0][0]);
+        Assertions.assertEquals(47, matrix3.multiplication(matrix2).getMatrix()[0][1]);
+
+        //виняток при нерівності розмірностей матриць, що перемножуються
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix.sumMatrix(matrix4));
+        Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
+    }
 }
