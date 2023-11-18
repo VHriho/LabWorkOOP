@@ -32,6 +32,8 @@ public interface IMatrix {
 
     IMatrix transposeMatrix(); //повертає транспоновану матрицю
 
+    IMatrix diagonal(float[] vector); //діагональна матриця на основі заданого вектору
+
     float[][] getMatrix(); //повертає матрицю
 
 }

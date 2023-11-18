@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MatrixTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2023-11-18T01:36:04" hostname="DESKTOP-07HMHSA" time="0.126">
+<testsuite name="MatrixTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2023-11-18T01:38:30" hostname="DESKTOP-07HMHSA" time="0.117">
   <properties/>
-  <testcase name="step3ForImmutable()" classname="MatrixTest" time="0.07"/>
+  <testcase name="step3ForImmutable()" classname="MatrixTest" time="0.058"/>
   <testcase name="step2ForImmutable()" classname="MatrixTest" time="0.001"/>
-  <testcase name="step10()" classname="MatrixTest" time="0.008"/>
+  <testcase name="step10()" classname="MatrixTest" time="0.007"/>
+  <testcase name="step11()" classname="MatrixTest" time="0.001"/>
   <testcase name="step2()" classname="MatrixTest" time="0.002"/>
-  <testcase name="step3()" classname="MatrixTest" time="0.002"/>
+  <testcase name="step3()" classname="MatrixTest" time="0.003"/>
   <testcase name="step4()" classname="MatrixTest" time="0.003"/>
-  <testcase name="step5()" classname="MatrixTest" time="0.0"/>
+  <testcase name="step5()" classname="MatrixTest" time="0.001"/>
   <testcase name="step6()" classname="MatrixTest" time="0.001"/>
   <testcase name="step8()" classname="MatrixTest" time="0.001"/>
-  <testcase name="step9()" classname="MatrixTest" time="0.001"/>
-  <testcase name="step9ForImmutable()" classname="MatrixTest" time="0.003"/>
-  <testcase name="step8ForImmutable()" classname="MatrixTest" time="0.003"/>
-  <testcase name="step6ForImmutable()" classname="MatrixTest" time="0.0"/>
+  <testcase name="step9()" classname="MatrixTest" time="0.003"/>
+  <testcase name="step9ForImmutable()" classname="MatrixTest" time="0.002"/>
+  <testcase name="step8ForImmutable()" classname="MatrixTest" time="0.001"/>
+  <testcase name="step6ForImmutable()" classname="MatrixTest" time="0.003"/>
+  <testcase name="step11ForImmutable()" classname="MatrixTest" time="0.002"/>
   <testcase name="step5ForImmutable()" classname="MatrixTest" time="0.001"/>
-  <testcase name="step10ForImmutable()" classname="MatrixTest" time="0.004"/>
-  <testcase name="step4ForImmutable()" classname="MatrixTest" time="0.004"/>
+  <testcase name="step10ForImmutable()" classname="MatrixTest" time="0.001"/>
+  <testcase name="step4ForImmutable()" classname="MatrixTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

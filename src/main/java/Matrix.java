@@ -201,6 +201,23 @@ public class Matrix implements IMatrix {
         return transpose;
     }
 
+    //повертає діагональну матрицю за вказаним вектором
+    @Override
+    public IMatrix diagonal(float[] vector) {
+        Matrix matrix = new Matrix(vector.length, vector.length);
+        for (int i = 0; i < vector.length; i++) {
+            for (int j = 0; j < vector.length; j++) {
+                if (i == j) {
+                    matrix.elements[i][j] = vector[i];
+                }
+                else{
+                    matrix.elements[i][j] = 0;
+                }
+            }
+        }
+        return matrix;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {
