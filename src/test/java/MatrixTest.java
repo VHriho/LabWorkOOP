@@ -16,6 +16,19 @@ public class MatrixTest {
         Assertions.assertEquals(0, emptyMatrix.getMatrix().length);
     }
 
+    @Test
+    void step2ForImmutable() {
+        IMatrix emptyMatrix = new ImmutableMatrix();
+        IMatrix selfDimensioned = new ImmutableMatrix(3,3);
+        IMatrix copiedMatrix = new ImmutableMatrix(selfDimensioned);
+
+        Assertions.assertEquals(3, selfDimensioned.getRows());
+        Assertions.assertEquals(3, selfDimensioned.getColumns());
+        Assertions.assertEquals(true, copiedMatrix.equals(selfDimensioned));
+        Assertions.assertEquals(0, emptyMatrix.getMatrix().length);
+
+    }
+
     //методи, що дозволяють заповнити матрицю значеннями
     @Test
     void step3() {
@@ -51,6 +64,24 @@ public class MatrixTest {
         //виключення при заповнені матриці розмірності 0
         Throwable thrown2 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix2.setRandomElem());
         Assertions.assertEquals("Dimension of matrix is 0", thrown2.getMessage());
+    }
+
+    @Test
+    void step3ForImmutable() {
+        IMatrix matrix = new ImmutableMatrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+
+        //виключення при зміні значення immutable матриці
+        Throwable thrown = Assertions.assertThrows(UnsupportedOperationException.class, () -> matrix.setElem(1,0,1));
+        Assertions.assertEquals("Immutable Matrix cannot be changed", thrown.getMessage());
+
+        //виключення при зміні випадковими значеннями immutable матриці
+        Throwable thrown1 = Assertions.assertThrows(UnsupportedOperationException.class, () -> matrix.setRandomElem());
+        Assertions.assertEquals("Immutable Matrix cannot be changed", thrown1.getMessage());
+
+        //виключення при зміні заданим набором значеннь
+        Throwable thrown2 = Assertions.assertThrows(UnsupportedOperationException.class, () -> matrix.fillElem(filledMatrix));
+        Assertions.assertEquals("Immutable Matrix cannot be changed", thrown2.getMessage());
     }
 
     //методи, що дозволяють отримати заданий елемент, рядок чи стовпчик
@@ -89,6 +120,42 @@ public class MatrixTest {
         Assertions.assertEquals("Column value out of matrix dimension", thrown6.getMessage());
     }
 
+    @Test
+    void step4ForImmutable() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+        IMatrix matrix1 = new ImmutableMatrix(matrix);
+
+        Assertions.assertEquals(1, matrix1.getElem(0,0));
+        Assertions.assertEquals(filledMatrix[0][0], matrix1.getRow(0)[0]);
+        Assertions.assertEquals(filledMatrix[0][1], matrix1.getColumn(1)[0]);
+
+        //виключення при від'ємному значені рядка або стовпчика
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix1.getElem(2, -1));
+        Assertions.assertEquals("Row or column value is negative", thrown.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown1 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix1.getElem(2, 4));
+        Assertions.assertEquals("Row or column value out of matrix dimension", thrown1.getMessage());
+
+        //виключення при від'ємному значені рядка
+        Throwable thrown3 = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix1.getRow(-1));
+        Assertions.assertEquals("Row value is negative", thrown3.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown4 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix1.getRow(4));
+        Assertions.assertEquals("Row value out of matrix dimension", thrown4.getMessage());
+
+        //виключення при від'ємному значені стовпця
+        Throwable thrown5 = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix1.getColumn(-1));
+        Assertions.assertEquals("Column value is negative", thrown5.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown6 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix1.getColumn(4));
+        Assertions.assertEquals("Column value out of matrix dimension", thrown6.getMessage());
+    }
+
     //розмірність матриці
     @Test
     public void step5() {
@@ -104,6 +171,20 @@ public class MatrixTest {
         Assertions.assertEquals(3,matrix3.getDimension().get("Columns"));
     }
 
+    @Test
+    public void step5ForImmutable() {
+        IMatrix matrix = new ImmutableMatrix();
+        IMatrix matrix1 = new ImmutableMatrix(3,3);
+        IMatrix matrix2 = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix2.fillElem(filledMatrix);
+        IMatrix matrix3 = new ImmutableMatrix(matrix2);
+
+        Assertions.assertEquals(0, matrix.getDimension().get("Rows"));
+        Assertions.assertEquals(3,matrix1.getDimension().get("Columns"));
+        Assertions.assertEquals(3,matrix3.getDimension().get("Columns"));
+    }
+
     //методи equals та hashCode
     @Test
     public void step6() {
@@ -113,13 +194,33 @@ public class MatrixTest {
         IMatrix matrix3 = new Matrix(3,3);
         float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
         matrix3.fillElem(filledMatrix);
+        IMatrix matrix4 = new ImmutableMatrix(matrix3);
 
         Assertions.assertEquals(false, matrix.equals(matrix1));
         Assertions.assertEquals(true, matrix1.equals(matrix2));
-        Assertions.assertEquals(false, matrix3.equals(matrix));
+        Assertions.assertEquals(false, matrix3.equals(matrix4));
 
-        Assertions.assertEquals(false, matrix1.hashCode() == matrix3.hashCode());
+        Assertions.assertEquals(false, matrix1.hashCode() == matrix4.hashCode());
         Assertions.assertEquals(true, matrix1.hashCode() == matrix2.hashCode());
-        Assertions.assertEquals(false, matrix3.hashCode() == matrix2.hashCode());
+        Assertions.assertEquals(true, matrix3.hashCode() == matrix4.hashCode());
+    }
+
+    @Test
+    public void step6ForImmutable() {
+        IMatrix matrix = new ImmutableMatrix();
+        IMatrix matrix1 = new ImmutableMatrix(3,3);
+        IMatrix matrix2 = new ImmutableMatrix(matrix1);
+        IMatrix matrix3 = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix3.fillElem(filledMatrix);
+        IMatrix matrix4 = new ImmutableMatrix(matrix3);
+
+        Assertions.assertEquals(false, matrix.equals(matrix1));
+        Assertions.assertEquals(true, matrix1.equals(matrix2));
+        Assertions.assertEquals(false, matrix4.equals(matrix3));
+
+        Assertions.assertEquals(false, matrix1.hashCode() == matrix4.hashCode());
+        Assertions.assertEquals(true, matrix1.hashCode() == matrix2.hashCode());
+        Assertions.assertEquals(true, matrix3.hashCode() == matrix4.hashCode());
     }
 }
