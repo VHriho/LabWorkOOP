@@ -18,6 +18,8 @@ public interface IMatrix {
 
     boolean equals(Object other); //перевизначений метод equals
 
+    int hashCode(); //перевизначений метод hashCode
+
     int getRows(); //повертає кількість рядки
 
     int getColumns(); //повертає кількість стовпців

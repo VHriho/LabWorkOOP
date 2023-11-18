@@ -103,4 +103,23 @@ public class MatrixTest {
         Assertions.assertEquals(3,matrix1.getDimension().get("Columns"));
         Assertions.assertEquals(3,matrix3.getDimension().get("Columns"));
     }
+
+    //методи equals та hashCode
+    @Test
+    public void step6() {
+        IMatrix matrix = new Matrix();
+        IMatrix matrix1 = new Matrix(3,3);
+        IMatrix matrix2 = new Matrix(matrix1);
+        IMatrix matrix3 = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix3.fillElem(filledMatrix);
+
+        Assertions.assertEquals(false, matrix.equals(matrix1));
+        Assertions.assertEquals(true, matrix1.equals(matrix2));
+        Assertions.assertEquals(false, matrix3.equals(matrix));
+
+        Assertions.assertEquals(false, matrix1.hashCode() == matrix3.hashCode());
+        Assertions.assertEquals(true, matrix1.hashCode() == matrix2.hashCode());
+        Assertions.assertEquals(false, matrix3.hashCode() == matrix2.hashCode());
+    }
 }

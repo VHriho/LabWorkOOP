@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class Matrix implements IMatrix {
@@ -125,6 +126,12 @@ public class Matrix implements IMatrix {
             return false;
         Matrix newMatrix = (Matrix) other;
         return (elements.length == newMatrix.elements.length && elements[0].length == newMatrix.elements[0].length && Arrays.deepEquals(elements, newMatrix.elements));
+    }
+
+    //перевизначений метод hashCode
+    @Override
+    public int hashCode() {
+        return Objects.hash(elements.length, elements[0].length, Arrays.deepHashCode(elements), 31);
     }
 
     //повертає кількість рядків
