@@ -483,4 +483,61 @@ public class MatrixTest {
         Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.columnMatrix(0));
         Assertions.assertEquals("Column value must be not negative or equal 0", thrown.getMessage());
     }
+
+    //Перення матриці в нижню та верхню трикутну
+    @Test
+    public void step15() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] fillMatrx = {{2, 3, 3}, {2, 7, 7}, {2, 3, 2}};
+        matrix.fillElem(fillMatrx);
+
+        Assertions.assertEquals(2, matrix.upperTriangular().getMatrix()[0][0]);
+        Assertions.assertEquals(3, matrix.upperTriangular().getMatrix()[0][1]);
+        Assertions.assertEquals(3, matrix.upperTriangular().getMatrix()[0][2]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[1][0]);
+        Assertions.assertEquals(4, matrix.upperTriangular().getMatrix()[1][1]);
+        Assertions.assertEquals(4, matrix.upperTriangular().getMatrix()[1][2]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[2][0]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[2][1]);
+        Assertions.assertEquals(-1, matrix.upperTriangular().getMatrix()[2][2]);
+
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[0][0]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[0][1]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[0][2]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[1][0]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[1][1]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[1][2]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[2][0]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[2][1]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[2][2]);
+    }
+
+    @Test
+    public void step15ForImmutable() {
+        IMatrix matrix1 = new Matrix(3,3);
+        float[][] fillMatrx = {{2, 3, 3}, {2, 7, 7}, {2, 3, 2}};
+        matrix1.fillElem(fillMatrx);
+
+        IMatrix matrix  = new ImmutableMatrix(matrix1);
+
+        Assertions.assertEquals(2, matrix.upperTriangular().getMatrix()[0][0]);
+        Assertions.assertEquals(3, matrix.upperTriangular().getMatrix()[0][1]);
+        Assertions.assertEquals(3, matrix.upperTriangular().getMatrix()[0][2]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[1][0]);
+        Assertions.assertEquals(4, matrix.upperTriangular().getMatrix()[1][1]);
+        Assertions.assertEquals(4, matrix.upperTriangular().getMatrix()[1][2]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[2][0]);
+        Assertions.assertEquals(0, matrix.upperTriangular().getMatrix()[2][1]);
+        Assertions.assertEquals(-1, matrix.upperTriangular().getMatrix()[2][2]);
+
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[0][0]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[0][1]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[0][2]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[1][0]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[1][1]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[1][2]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[2][0]);
+        Assertions.assertEquals(0, matrix.lowerTriangular().getMatrix()[2][1]);
+        Assertions.assertEquals(1, matrix.lowerTriangular().getMatrix()[2][2]);
+    }
 }

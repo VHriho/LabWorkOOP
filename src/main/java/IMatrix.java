@@ -40,6 +40,10 @@ public interface IMatrix {
 
     IMatrix columnMatrix(int n); //матриця стовпчик
 
+    IMatrix upperTriangular(); //верхня трикутна
+
+    IMatrix lowerTriangular(); //нижня трикутна
+
     float[][] getMatrix(); //повертає матрицю
 
 }
