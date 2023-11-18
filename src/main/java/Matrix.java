@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Matrix implements IMatrix {
 
@@ -24,6 +25,39 @@ public class Matrix implements IMatrix {
             elements[i] = Arrays.copyOf(copiedMatrix.getMatrix()[i], copiedMatrix.getMatrix()[i].length);
     }
 
+    //заповнює матрицю значеннями
+    @Override
+    public void setElem(int m, int n, float elem) {
+        if (m < 0 || n < 0)
+            throw new NegativeArraySizeException("Row or column value is negative");
+        if (m >= elements.length || n >= elements[0].length)
+            throw new ArrayIndexOutOfBoundsException("Row or column value out of matrix dimension");
+        else
+            elements[m][n] = elem;
+    }
+
+    //заповнює матрицю випадковими значеннями
+    @Override
+    public void setRandomElem() {
+        if (elements.length == 0) {
+            throw new ArrayIndexOutOfBoundsException("Dimension of matrix is 0");
+        }
+        else {
+            Random setRandom = new Random();
+            for (int i = 0; i < elements.length; i++) {
+                for (int j = 0; j < elements[0].length; j++) {
+                    elements[i][j] = setRandom.nextFloat(10);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void fillElem(float[][] matrix){
+        for (int i = 0; i < elements.length; i++)
+            System.arraycopy(matrix[i], 0, elements[i], 0, elements[0].length);
+    }
+
     //перевизначений метод equals
     @Override
     public boolean equals(Object other) {
@@ -33,7 +67,6 @@ public class Matrix implements IMatrix {
             return false;
         Matrix newMatrix = (Matrix) other;
         return (elements.length == newMatrix.elements.length && elements[0].length == newMatrix.elements[0].length && Arrays.deepEquals(elements, newMatrix.elements));
-
     }
 
     //повертає кількість рядків
