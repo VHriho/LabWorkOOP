@@ -6,6 +6,12 @@ public interface IMatrix {
 
     void setRandomElem(); //заповнює матрицю випадковими значеннями
 
+    float getElem(int m, int n); //повертає елемент за вказаними параметрами
+
+    float[] getRow(int m); //повертає заданий рядок
+
+    float[] getColumn(int n); //повертає заданий стовпчик
+
     boolean equals(Object other); //перевизначений метод equals
 
     int getRows(); //повертає кількість рядки

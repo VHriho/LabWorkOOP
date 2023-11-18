@@ -52,4 +52,40 @@ public class MatrixTest {
         Throwable thrown2 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix2.setRandomElem());
         Assertions.assertEquals("Dimension of matrix is 0", thrown2.getMessage());
     }
+
+    //методи, що дозволяють отримати заданий елемент, рядок чи стовпчик
+    @Test
+    void step4() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+
+        Assertions.assertEquals(1, matrix.getElem(0,0));
+        Assertions.assertEquals(filledMatrix[0][0], matrix.getRow(0)[0]);
+        Assertions.assertEquals(filledMatrix[0][1], matrix.getColumn(1)[0]);
+
+        //виключення при від'ємному значені рядка або стовпчика
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.getElem(2, -1));
+        Assertions.assertEquals("Row or column value is negative", thrown.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown1 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix.getElem(2, 4));
+        Assertions.assertEquals("Row or column value out of matrix dimension", thrown1.getMessage());
+
+        //виключення при від'ємному значені рядка
+        Throwable thrown3 = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.getRow(-1));
+        Assertions.assertEquals("Row value is negative", thrown3.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown4 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix.getRow(4));
+        Assertions.assertEquals("Row value out of matrix dimension", thrown4.getMessage());
+
+        //виключення при від'ємному значені стовпця
+        Throwable thrown5 = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.getColumn(-1));
+        Assertions.assertEquals("Column value is negative", thrown5.getMessage());
+
+        //виключення при порушені вказання розмірності
+        Throwable thrown6 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix.getColumn(4));
+        Assertions.assertEquals("Column value out of matrix dimension", thrown6.getMessage());
+    }
 }
