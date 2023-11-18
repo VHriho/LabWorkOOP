@@ -385,5 +385,40 @@ public class MatrixTest {
         Assertions.assertEquals(1, matrix.diagonal(diag).getMatrix()[3][3]);
     }
 
-    
+    //одинична матриця
+    @Test
+    public void step12() {
+        IMatrix matrix = new Matrix();
+
+        Assertions.assertEquals(1, matrix.singleMatrix(3,3).getMatrix()[0][0]);
+        Assertions.assertEquals(1, matrix.singleMatrix(3,3).getMatrix()[1][1]);
+        Assertions.assertEquals(1, matrix.singleMatrix(3,3).getMatrix()[2][2]);
+
+        //виняток при від'ємних значеннях розмірності матриці
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.singleMatrix(3,-2));
+        Assertions.assertEquals("Rows and columns value must be equal and more than 0", thrown.getMessage());
+
+        //виняток при відсутності квадратної форми
+        Throwable thrown1 = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix.singleMatrix(3,2));
+        Assertions.assertEquals("Rows and columns value must be equal", thrown1.getMessage());
+    }
+
+    @Test
+    public void step12ForImmutable() {
+        IMatrix matrix = new ImmutableMatrix();
+
+        Assertions.assertEquals(1, matrix.singleMatrix(4,4).getMatrix()[0][0]);
+        Assertions.assertEquals(1, matrix.singleMatrix(4,4).getMatrix()[1][1]);
+        Assertions.assertEquals(1, matrix.singleMatrix(4,4).getMatrix()[2][2]);
+        Assertions.assertEquals(1, matrix.singleMatrix(4,4).getMatrix()[3][3]);
+
+        //виняток при від'ємних значеннях розмірності матриці
+        Throwable thrown = Assertions.assertThrows(NegativeArraySizeException.class, () -> matrix.singleMatrix(-3,2));
+        Assertions.assertEquals("Rows and columns value must be equal and more than 0", thrown.getMessage());
+
+        //виняток при відсутності квадратної форми
+        Throwable thrown1 = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix.singleMatrix(3,4));
+        Assertions.assertEquals("Rows and columns value must be equal", thrown1.getMessage());
+
+    }
 }

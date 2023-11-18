@@ -200,6 +200,25 @@ public class ImmutableMatrix implements IMatrix{
         return matrix;
     }
 
+    //одинична матриця
+    @Override
+    public IMatrix singleMatrix(int m, int n) {
+        if (m <= 0 || n <= 0)
+            throw new NegativeArraySizeException("Rows and columns value must be equal and more than 0");
+        if (m != n)
+            throw new IllegalArgumentException("Rows and columns value must be equal");
+        ImmutableMatrix single = new ImmutableMatrix(m, n);
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                if (i == j )
+                    single.elements[i][j] = 1;
+                else
+                    single.elements[i][j] = 0;
+            }
+        }
+        return single;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {

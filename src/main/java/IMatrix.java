@@ -34,6 +34,8 @@ public interface IMatrix {
 
     IMatrix diagonal(float[] vector); //діагональна матриця на основі заданого вектору
 
+    IMatrix singleMatrix(int m, int n); //одинична матриця
+
     float[][] getMatrix(); //повертає матрицю
 
 }
