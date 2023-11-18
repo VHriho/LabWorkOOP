@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Matrix.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Matrix.java</span></div><h1>Matrix.java</h1><pre class="source lang-java linenums">import java.util.Arrays;
+
+public class Matrix implements IMatrix {
+
+    private final float[][] elements;
+
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, С‰Рѕ СЃС‚РІРѕСЂСЋС” РїСѓСЃС‚Сѓ РјР°С‚СЂРёС†СЋ
+<span class="fc" id="L8">    public Matrix() {</span>
+<span class="fc" id="L9">        elements = new float[0][0];</span>
+<span class="fc" id="L10">    }</span>
+
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, С‰Рѕ СЃС‚РІРѕСЂСЋС” РјР°С‚СЂРёС†СЋ Р·Р°РґР°РЅРѕРіРѕ СЂРѕР·РјС–СЂСѓ
+<span class="fc" id="L13">    public Matrix(int m, int n) {</span>
+<span class="pc bpc" id="L14" title="2 of 4 branches missed.">        if (m &lt; 0 || n &lt; 0)</span>
+<span class="nc" id="L15">            throw new NegativeArraySizeException(&quot;Row or column value is negative&quot;);</span>
+        else
+<span class="fc" id="L17">            elements = new float[m][n];</span>
+<span class="fc" id="L18">    }</span>
+
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, С‰Рѕ СЃС‚РІРѕСЂСЋС” РєРѕРїС–СЋ С–РЅС€РѕС— РјР°С‚СЂРёС†С–
+<span class="fc" id="L21">    public Matrix(IMatrix copiedMatrix) {</span>
+<span class="fc" id="L22">        elements = new float[copiedMatrix.getRows()][copiedMatrix.getColumns()];</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        for (int i = 0; i &lt; copiedMatrix.getRows(); i++)</span>
+<span class="fc" id="L24">            elements[i] = Arrays.copyOf(copiedMatrix.getMatrix()[i], copiedMatrix.getMatrix()[i].length);</span>
+<span class="fc" id="L25">    }</span>
+
+    //РїРµСЂРµРІРёР·РЅР°С‡РµРЅРёР№ РјРµС‚РѕРґ equals
+    @Override
+    public boolean equals(Object other) {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if(this == other)</span>
+<span class="nc" id="L31">            return true;</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if(getClass() != other.getClass())</span>
+<span class="nc" id="L33">            return false;</span>
+<span class="fc" id="L34">        Matrix newMatrix = (Matrix) other;</span>
+<span class="pc bpc" id="L35" title="3 of 6 branches missed.">        return (elements.length == newMatrix.elements.length &amp;&amp; elements[0].length == newMatrix.elements[0].length &amp;&amp; Arrays.deepEquals(elements, newMatrix.elements));</span>
+
+    }
+
+    //РїРѕРІРµСЂС‚Р°С” РєС–Р»СЊРєС–СЃС‚СЊ СЂСЏРґРєС–РІ
+    @Override
+    public int getRows(){
+<span class="fc" id="L42">        return elements.length;</span>
+    }
+
+    //РїРѕРІРµСЂС‚Р°С” РєС–Р»СЊРєС–СЃС‚СЊ СЃС‚РѕРІРїС†С–РІ
+    @Override
+    public int getColumns(){
+<span class="fc" id="L48">        return elements[0].length;</span>
+    }
+
+    //РџРѕРІРµСЂС‚Р°С” РјР°С‚СЂРёС†СЋ
+    @Override
+    public float[][] getMatrix() {
+<span class="fc" id="L54">        return elements;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
