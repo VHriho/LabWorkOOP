@@ -146,6 +146,32 @@ public class Matrix implements IMatrix {
         return elements[0].length;
     }
 
+    //сума матриць
+    @Override
+    public IMatrix sumMatrix(IMatrix matrix) {
+        if (this.getRows() != matrix.getRows() || this.getColumns() != matrix.getColumns())
+            throw new IllegalArgumentException("Matrices must have an equal number of columns and rows");
+        Matrix sumOfMatrix = new Matrix(matrix.getRows(), matrix.getColumns());
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                sumOfMatrix.setElem(i, j, this.getElem(i, j) + matrix.getElem(i, j));
+            }
+        }
+        return sumOfMatrix;
+    }
+
+    //множення на скаляр
+    @Override
+    public IMatrix multMatrix(float mult) {
+        Matrix resMult = new Matrix(this.elements.length, this.elements[0].length);
+        for (int i = 0; i < this.elements.length; i++) {
+            for (int j = 0; j < this.elements[0].length; j++) {
+                resMult.setElem(i, j, elements[i][j] * mult);
+            }
+        }
+        return resMult;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {

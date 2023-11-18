@@ -223,4 +223,68 @@ public class MatrixTest {
         Assertions.assertEquals(true, matrix1.hashCode() == matrix2.hashCode());
         Assertions.assertEquals(true, matrix3.hashCode() == matrix4.hashCode());
     }
+
+    //додавання матриць та множення на скаляр
+    @Test
+    public void step8() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+        IMatrix matrix1 = new Matrix(matrix);
+
+        IMatrix matrix2 = new Matrix(2,2);
+        matrix2.setElem(0,0,1);
+        matrix2.setElem(0,1,2);
+        matrix2.setElem(1,0,3);
+        matrix2.setElem(1,1,4);
+
+        Assertions.assertEquals(2, matrix.sumMatrix(matrix1).getMatrix()[0][0]);
+        Assertions.assertEquals(4, matrix.sumMatrix(matrix1).getMatrix()[0][1]);
+        Assertions.assertEquals(6, matrix.sumMatrix(matrix1).getMatrix()[0][2]);
+        Assertions.assertEquals(8, matrix.sumMatrix(matrix1).getMatrix()[1][0]);
+        Assertions.assertEquals(10, matrix.sumMatrix(matrix1).getMatrix()[1][1]);
+
+        Assertions.assertEquals(3, matrix.multMatrix(3).getMatrix()[0][0]);
+        Assertions.assertEquals(6, matrix.multMatrix(3).getMatrix()[0][1]);
+        Assertions.assertEquals(9, matrix.multMatrix(3).getMatrix()[0][2]);
+        Assertions.assertEquals(12, matrix.multMatrix(3).getMatrix()[1][0]);
+        Assertions.assertEquals(15, matrix.multMatrix(3).getMatrix()[1][1]);
+
+        //виняток при нерівності розмірностей матриць, що сумуються
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix2.sumMatrix(matrix));
+        Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
+
+    }
+
+    @Test
+    public void step8ForImmutable() {
+        IMatrix matrix = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix.fillElem(filledMatrix);
+        IMatrix matrix1 = new ImmutableMatrix(matrix);
+
+        IMatrix matrix2 = new Matrix(2,2);
+        matrix2.setElem(0,0,1);
+        matrix2.setElem(0,1,2);
+        matrix2.setElem(1,0,3);
+        matrix2.setElem(1,1,4);
+
+        IMatrix matrix4 = new ImmutableMatrix(matrix1);
+
+        Assertions.assertEquals(2, matrix4.sumMatrix(matrix1).getMatrix()[0][0]);
+        Assertions.assertEquals(4, matrix4.sumMatrix(matrix1).getMatrix()[0][1]);
+        Assertions.assertEquals(6, matrix4.sumMatrix(matrix1).getMatrix()[0][2]);
+        Assertions.assertEquals(8, matrix4.sumMatrix(matrix1).getMatrix()[1][0]);
+
+        Assertions.assertEquals(3, matrix1.multMatrix(3).getMatrix()[0][0]);
+        Assertions.assertEquals(6, matrix1.multMatrix(3).getMatrix()[0][1]);
+        Assertions.assertEquals(9, matrix1.multMatrix(3).getMatrix()[0][2]);
+        Assertions.assertEquals(12, matrix1.multMatrix(3).getMatrix()[1][0]);
+
+        //виняток при нерівності розмірностей матриць, що сумуються
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> matrix2.sumMatrix(matrix4));
+        Assertions.assertEquals("Matrices must have an equal number of columns and rows", thrown.getMessage());
+    }
+
+    
 }

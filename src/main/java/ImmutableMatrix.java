@@ -129,6 +129,32 @@ public class ImmutableMatrix implements IMatrix{
         return Objects.hash(elements.length, elements[0].length, Arrays.deepHashCode(elements), 31);
     }
 
+    //сума матриць
+    @Override
+    public IMatrix sumMatrix(IMatrix matrix) {
+        if (this.getRows() != matrix.getRows() || this.getColumns() != matrix.getColumns())
+            throw new IllegalArgumentException("Matrices must have an equal number of columns and rows");
+        ImmutableMatrix sumOfMatrix = new ImmutableMatrix(matrix.getRows(), matrix.getColumns());
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                sumOfMatrix.elements[i][j] = this.getElem(i, j) + matrix.getElem(i, j);
+            }
+        }
+        return sumOfMatrix;
+    }
+
+    //повертає добуток матриці на скаляр
+    @Override
+    public IMatrix multMatrix(float mult) {
+        ImmutableMatrix resMult = new ImmutableMatrix(this.elements.length, this.elements[0].length);
+        for (int i = 0; i < this.elements.length; i++) {
+            for (int j = 0; j < this.elements[0].length; j++) {
+                resMult.elements[i][j] = elements[i][j] * mult;
+            }
+        }
+        return resMult;
+    }
+
     //Повертає матрицю
     @Override
     public float[][] getMatrix() {

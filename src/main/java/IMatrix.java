@@ -24,6 +24,10 @@ public interface IMatrix {
 
     int getColumns(); //повертає кількість стовпців
 
+    IMatrix sumMatrix(IMatrix matrix); //повертає суму двох матриць
+
+    IMatrix multMatrix(float mult); //повертає добуток матриці на скаляр
+
     float[][] getMatrix(); //повертає матрицю
 
 }
