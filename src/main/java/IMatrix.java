@@ -36,6 +36,8 @@ public interface IMatrix {
 
     IMatrix singleMatrix(int m, int n); //одинична матриця
 
+    IMatrix rowMatrix(int m); //матриця рядок
+
     float[][] getMatrix(); //повертає матрицю
 
 }

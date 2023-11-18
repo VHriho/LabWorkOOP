@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Random;
 
 public class ImmutableMatrix implements IMatrix{
 
@@ -217,6 +218,19 @@ public class ImmutableMatrix implements IMatrix{
             }
         }
         return single;
+    }
+
+    //матриця рядок
+    @Override
+    public IMatrix rowMatrix(int m) {
+        if(m <= 0 )
+            throw new NegativeArraySizeException("Row value must be not negative or equal 0");
+        Random setRandom = new Random();
+        ImmutableMatrix rowMat = new ImmutableMatrix(m, 1);
+        for (int i = 0; i < m; i++) {
+            rowMat.elements[i][0] = setRandom.nextFloat(10);
+        }
+        return rowMat;
     }
 
     //Повертає матрицю
