@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MatrixTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-11-18T01:06:38" hostname="DESKTOP-07HMHSA" time="0.056">
+<testsuite name="MatrixTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-11-18T01:09:51" hostname="DESKTOP-07HMHSA" time="0.081">
   <properties/>
   <testcase name="step2()" classname="MatrixTest" time="0.034"/>
   <testcase name="step3()" classname="MatrixTest" time="0.005"/>
-  <testcase name="step4()" classname="MatrixTest" time="0.012"/>
+  <testcase name="step4()" classname="MatrixTest" time="0.031"/>
+  <testcase name="step5()" classname="MatrixTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

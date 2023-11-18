@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public interface IMatrix {
 
     void setElem(int m, int n, float elem); //заповнює матрицю за вказаними параметрами
@@ -11,6 +13,8 @@ public interface IMatrix {
     float[] getRow(int m); //повертає заданий рядок
 
     float[] getColumn(int n); //повертає заданий стовпчик
+
+    HashMap<String, Integer> getDimension(); //повертає розмірність матриці
 
     boolean equals(Object other); //перевизначений метод equals
 

@@ -88,4 +88,19 @@ public class MatrixTest {
         Throwable thrown6 = Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrix.getColumn(4));
         Assertions.assertEquals("Column value out of matrix dimension", thrown6.getMessage());
     }
+
+    //розмірність матриці
+    @Test
+    public void step5() {
+        IMatrix matrix = new Matrix();
+        IMatrix matrix1 = new Matrix(3,3);
+        IMatrix matrix2 = new Matrix(3,3);
+        float[][] filledMatrix = {{1,2,3},{4,5,6},{7,8,9}};
+        matrix2.fillElem(filledMatrix);
+        IMatrix matrix3 = new Matrix(matrix2);
+
+        Assertions.assertEquals(0, matrix.getDimension().get("Rows"));
+        Assertions.assertEquals(3,matrix1.getDimension().get("Columns"));
+        Assertions.assertEquals(3,matrix3.getDimension().get("Columns"));
+    }
 }
